@@ -1,0 +1,24 @@
+class Monster : Person
+{
+    public int Damage { get; set; }
+    public int Armor { get; set; }
+    public int ExperiencePoints { get; set; }
+
+    public Monster(Random random, string name, int level) : base(name, level)
+    {
+        HealthMax = Health = random.Next(50, 100) * Level;
+        Energy = random.Next(0, 50) * Level;
+        Damage = random.Next(5, 15) * Level;
+        Armor = random.Next(1, 5) * Level;
+        ExperiencePoints = 20 * Level;
+    }
+
+    public void showInfo()
+    {
+        Console.WriteLine("Характеристики монстра:");
+        showPersonData();
+        Console.WriteLine("Шкода: " + this.Damage);
+        Console.WriteLine("Броня: " + this.Armor);
+        Console.WriteLine("Очки досвіду: " + this.ExperiencePoints);
+    }
+}

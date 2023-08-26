@@ -1,0 +1,126 @@
+abstract class Player : Person
+{
+    private List<IUseSkill> skillList = null;
+    public int BonusDamage { get; set; }
+    public int BonusProtect { get; set; }
+    public int Strength { get; set; }
+    public int Agility { get; set; }
+    public int Stamina { get; set; }
+    public int ExperiencePoints { get; set; }
+    public Armor EquippedArmor { get; set; }
+    public Weapon EquippedWeapon { get; set; }
+    public int Money { get; set; }
+    public void addedExp(int exp)
+    {
+        this.ExperiencePoints += exp;
+    }
+
+    public Player(string name, int str, int agl, int stm) : base(name, 1)
+    {
+        this.Strength = str;
+        this.Agility = agl;
+        this.Stamina = stm;
+        this.ExperiencePoints = 0;
+        this.Energy = 100;
+        this.skillList = new List<IUseSkill>();
+
+        this.Money = 0;
+
+        this.HealthMax = this.Health = 50 * this.Stamina;
+    }
+
+    private bool checkSkills(int skillNumber)
+    {
+        if (this.skillList.FindIndex(skill => skill.getSkillNumber() == skillNumber) < 0)
+            return true;
+
+        return false;
+    }
+
+    public void addedSkill(IUseSkill skill)
+    {
+        if (checkSkills(skill.getSkillNumber()))
+        {
+            skillList.Add(skill);
+        }
+    }
+
+    public void removeSkill(int index)
+    {
+        skillList.RemoveAt(index);
+    }
+
+    public void useSkill(int index)
+    {
+        if (index >= skillList.Count)
+        {
+            throw new Exception("Такого вміння немає!");
+        }
+
+        skillList[index].use(this);
+    }
+
+    public void resetPlayerValue()
+    {
+        BonusDamage = 0;
+        BonusProtect = 0;
+
+        this.addedHealth(10);
+    }
+
+    public void showSkillList()
+    {
+        for (int i = 0; i < skillList.Count; i++)
+        {
+            Console.WriteLine(i + ". " + skillList[i].getName());
+        }
+    }
+
+    public void EquipArmor(Armor armor)
+    {
+        this.EquippedArmor = armor;
+    }
+
+    public void EquipWeapon(Weapon weapon)
+    {
+        this.EquippedWeapon = weapon;
+    }
+
+    public void ShowInfo()
+    {
+        Console.WriteLine();
+        Console.WriteLine("Характеристики гравця:");
+        showPersonData();
+        Console.WriteLine("Сила: " + this.Strength);
+        Console.WriteLine("Спритність: " + this.Agility);
+        Console.WriteLine("Витривалість: " + this.Stamina);
+        Console.WriteLine("Очки досвіду: " + this.ExperiencePoints);
+        Console.Write("Зброя: " + (this.EquippedWeapon != null ? this.EquippedWeapon.Name : "Відсутня"));
+
+        if (this.EquippedWeapon != null)
+            Console.Write(" (Ціна: " + this.EquippedWeapon.Price + ")");
+
+        Console.Write("\nБроня: " + (this.EquippedArmor != null ? this.EquippedArmor.Name : "Відсутня"));
+
+        if (this.EquippedArmor != null)
+            Console.Write(" (Ціна: " + this.EquippedArmor.Price + ")");
+
+        Console.WriteLine();
+    }
+
+    public int CalculateDamage()
+    {
+        int baseDamage = this.Strength + this.EquippedWeapon?.Damage ?? 0;
+        int criticalStrikeChance = this.Agility;
+        bool isCritical = new Random().Next(0, 100) < criticalStrikeChance;
+        int totalDamage = isCritical ? baseDamage * 2 : baseDamage;
+
+        return totalDamage + BonusDamage;
+    }
+
+    public int CalculateDefense()
+    {
+        int baseDefense = this.Stamina + this.EquippedArmor?.Defense ?? 0;
+        return baseDefense + BonusProtect;
+    }
+}

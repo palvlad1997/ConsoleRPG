@@ -1,0 +1,23 @@
+class Skill : NameTrait
+{
+    protected int epCost = 0;
+    protected int skillNumber = 0;
+    public Skill(string name, int cost) : base(name)
+    {
+        epCost = cost;
+    }
+
+    public string getName() => this.Name;
+    public int getSkillNumber() => this.skillNumber;
+
+    protected bool decreaseEp(Player player)
+    {
+        if (player.Energy >= epCost)
+        {
+            player.Energy -= epCost;
+            return true;
+        }
+
+        return false;
+    }
+}
