@@ -1,0 +1,9 @@
+class NameTrait
+{
+    public string Name { get; set; }
+
+    public NameTrait(string name)
+    {
+        Name = name;
+    }
+}

@@ -1,0 +1,7 @@
+class Rogue : Player
+{
+    public Rogue(string name)
+        : base(name, 10, 30, 20)
+    {
+    }
+}

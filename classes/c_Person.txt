@@ -1,0 +1,38 @@
+abstract class Person : NameTrait
+{
+    public int Health { get; set; }
+    public int HealthMax { get; set; }
+    public int Energy { get; set; }
+    public int Level { get; set; }
+
+    public void addedHealth(int value)
+    {
+        if (Health + value > HealthMax)
+            Health = HealthMax;
+        else
+            Health += value;
+    }
+
+    public void damageHealth(int damage)
+    {
+        if (Health - damage < 0)
+            Health = 0;
+        else
+            Health -= damage;
+    }
+
+    public Person(string name, int level) : base(name)
+    {
+        Level = level;
+    }
+
+    protected void showPersonData()
+    {
+        Console.WriteLine("Ім'я: " + this.Name);
+        Console.WriteLine("Рівень: " + this.Level);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Здоров'я: " + this.Health + "/" + this.HealthMax);
+        Console.ResetColor();
+        Console.WriteLine("Енергія: " + this.Energy);
+    }
+}
