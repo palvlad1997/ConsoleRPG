@@ -1,0 +1,8 @@
+C:\Users\user\source\repos\rpg_copy\rpg_copy\bin\Debug\rpg_copy.exe.config
+C:\Users\user\source\repos\rpg_copy\rpg_copy\bin\Debug\rpg_copy.exe
+C:\Users\user\source\repos\rpg_copy\rpg_copy\bin\Debug\rpg_copy.pdb
+C:\Users\user\source\repos\rpg_copy\rpg_copy\obj\Debug\rpg_copy.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\rpg_copy\rpg_copy\obj\Debug\rpg_copy.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\source\repos\rpg_copy\rpg_copy\obj\Debug\rpg_copy.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\rpg_copy\rpg_copy\obj\Debug\rpg_copy.exe
+C:\Users\user\source\repos\rpg_copy\rpg_copy\obj\Debug\rpg_copy.pdb

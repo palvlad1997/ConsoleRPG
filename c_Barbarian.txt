@@ -1,7 +1,0 @@
-class Barbarian : Player
-{
-    public Barbarian(string name)
-        : base(name, 30, 10, 20)
-    {
-    }
-}
